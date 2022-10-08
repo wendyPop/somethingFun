@@ -1,17 +1,24 @@
 const clearScreen = () => {
-  document.getElementById("result").value = ''
+  document.getElementById("result").value = 0
 }
 
 const display = (val) => {
+  if(document.getElementById("result").value === '0'){
+    document.getElementById("result").value = '';
+  }
   document.getElementById("result").value += val
 }
 
 const calculate = () => {
   let p = document.getElementById("result").value
   if (p) {
-    document.getElementById("result").value = eval(p)
+    try{
+      document.getElementById("result").value = eval(p)
+    }catch(e){
+      document.getElementById("result").value = '입력오류';
+    }
   } else {
-    alert('계산할 수 없습니다.')
+    alert('계산할 수치를 입력해주세요')
   }
 }
 
