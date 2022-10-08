@@ -29,21 +29,21 @@ const renderCalendar = () => {
 
   // 지난달
   for (let x = firstDayIndex; x > 0; x--) {
-    days += `<div class="previous-days">${prevLastDay - x + 1}</div>`
+    days += `<div class="previous-days day">${prevLastDay - x + 1}</div>`
   }
 
   // 이번달
   for (let i = 1; i <= lastDay; i++) {
     if ( i === new Date().getDate() && date.getMonth() === new Date().getMonth()) {
-      days += `<div class="today"> ${i} </div>`
+      days += `<div class="today day"> ${i} </div>`
     } else {
-      days += `<div> ${i} </div>`
+      days += `<div class="day"> ${i} </div>`
     }
   }
 
   // 다음달
   for (let j = 1; j <= nextDays; j++) {
-    days += `<div class="next-days"> ${j} </div>`
+    days += `<div class="next-days day"> ${j} </div>`
     monthDays.innerHTML = days;
   }
 }
@@ -57,6 +57,17 @@ document.querySelector('.prev').addEventListener('click', () => {
 document.querySelector('.next').addEventListener('click', () => {
   date.setMonth(date.getMonth() + 1);
   renderCalendar()
+})
+
+// 라이브 이벤트 핸들러 부착
+document.addEventListener('click', e => {
+  if (e.target.closest('.day')) {
+    let all = document.querySelectorAll('.day')
+    for ( let elem of all) {
+      elem.classList.remove('today')
+    }
+    e.target.classList.add('today')
+  }
 })
 
 renderCalendar()

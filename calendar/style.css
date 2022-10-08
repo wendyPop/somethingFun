@@ -105,7 +105,6 @@
 /* 일자에 마우스를 올리면, 단 today 빼고 스타일링 적용 */
 .days div:not(.today):hover {
     border-radius: 50%;
-    border: 1px solid black;
     background-color: rgba(0, 0, 0, 0.215);
     cursor: pointer;
 }

@@ -26,23 +26,26 @@ let currentPlay = 0
 let currentAudio = null
 let audioElem = null
 let currentDuration
+// timer
 let currentTimer
 let totalDurationTimer
+let sliderTimer
+
 const trackAlbum = document.querySelector('.track-art')
 const trackName = document.querySelector('.track-name')
 const trackArtist = document.querySelector('.track-artist')
 let currentTime = document.querySelector('.current-time')
 let totalDuration = document.querySelector('.total-duration')
+// const badge = document.querySelector('.badge')
+const slider = document.querySelector('.seek_slider')
+slider.addEventListener('change', function(event) {
+  console.log(event.target.value)
+  audioElem.currentTime = event.target.value;
+})
 
-
-function seekTo() {
-  // todo 음악을 빨리감기, 뒤로감기 등등 ?
-}
-
-const randomTrack = () => {
-  // todo 음악들 순서를 섞어주자
-  alert('랜덤 뮤직')
-}
+/*const randomTrack = () => {
+  alert('랜덤 뮤직 재생 구현하기')
+}*/
 
 // 음악 재생 또는 정지
 const playAndPauseTrack = () => {
@@ -56,6 +59,9 @@ const playAndPauseTrack = () => {
 
 const musicPause = () => {
   // todo 정지를 하지만 정지한 구간을 기억하기
+  if (!audioElem) {
+    return false
+  }
   trackAlbum.classList.remove('rotate')
   let playBtn = document.querySelector('.fa-pause-circle')
   playBtn.classList.remove('fa-pause-circle')
@@ -70,9 +76,15 @@ const musicPause = () => {
 }
 
 const musicStart = () => {
+
+  // 화면 요소 핸들링
+  // 앨범 로드후 회전
+  // 무한루프라면 다시 슬라이더 초기화
+  slider.value = 0
+  // badge.classList.add('hidden')
   trackAlbum.style.backgroundImage = `url(${musicList[currentPlay].album})`;
   trackAlbum.classList.add('rotate');
-
+  // 버튼요소들 토글
   let playBtn = document.querySelector('.fa-play-circle')
   playBtn.classList.remove('fa-play-circle')
   playBtn.classList.add('fa-pause-circle')
@@ -80,14 +92,17 @@ const musicStart = () => {
   // Audio 요소를 통한 방법
   audioElem = document.createElement('audio');
   audioElem.src = musicList[currentPlay].music
+  audioElem.loop = false
+
+  // 오디오가 로드되면
   audioElem.addEventListener('loadedmetadata', function(){
     totalDuration.innerHTML = toMMSS(audioElem.duration)
     currentDuration = audioElem.duration
+    slider.max = parseInt(audioElem.duration)
   })
   audioElem.play()
   setCurrentCountUp()
   setTotalCountDown()
-
 
   trackName.innerText = musicList[currentPlay].name;
   trackArtist.innerText = musicList[currentPlay].artist;
@@ -99,16 +114,15 @@ const musicStart = () => {
 }
 
 
-
-// todo 프로그래스바 change 음악 구간 변경
-
 const setCurrentCountUp = () => {
 
-  // todo 프로그래스바도 따라서 count up 하기
+  // 현재 구간 시계
   currentTimer = setInterval(function(){
     currentTime.innerHTML = toMMSS(audioElem.currentTime)
     if (audioElem.currentTime === audioElem.duration) {
       if(audioElem.loop) {
+        console.log('다시 재생을 해야함 ? 가능 ?')
+        // todo 현재 무한루프중이라면 다시 재생
         currentPlay = Number(currentPlay)
         clearInterval(currentTimer)
         musicStart()
@@ -119,9 +133,20 @@ const setCurrentCountUp = () => {
       }
     }
   }, 1000)
+
+  // 현재 슬라이더 위치
+  sliderTimer = setInterval(function(){
+    slider.value++
+    if (slider.value === audioElem.duration) {
+      alert('슬라이더 끝났다')
+      slider.value = 0
+      clearInterval(sliderTimer)
+    }
+  }, 1000)
 }
 
 const setTotalCountDown = () => {
+  // 노래 전체 구간 카운트 다운
   totalDurationTimer = setInterval(function(){
     if( parseInt(currentDuration) <= 0) {
       clearInterval(totalDurationTimer)
@@ -130,14 +155,12 @@ const setTotalCountDown = () => {
   }, 1000)
 }
 
-const musicReset = () => {
-  trackAlbum.style.backgroundImage = null
-  trackName.innerText = '';
-  trackArtist.innerText = '';
-  currentAudio = null;
-}
 
 const prevTrack = () => {
+
+  if(!audioElem){
+    return false
+  }
   if(currentPlay <= 0) {
     alert('첫번째 곡입니다.')
     return false
@@ -157,10 +180,18 @@ const nextTrack = () => {
   musicStart()
 }
 
-const repeatTrack = () => {
-  // todo 화면에 작은 툴팁 같은거 토글
-  audioElem.loop = !!audioElem.loop;
-}
+/*const repeatTrack = () => {
+  if(!audioElem) {
+    return false
+  }
+  if(audioElem.loop){
+    badge.classList.add('hidden')
+    audioElem.loop = false
+  } else {
+    badge.classList.remove('hidden')
+    audioElem.loop = true
+  }
+}*/
 
 const toMMSS = (param) => {
   var sec_num = parseInt(param, 10); // don't forget the second param
