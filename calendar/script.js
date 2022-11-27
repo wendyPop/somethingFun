@@ -7,9 +7,9 @@ const renderCalendar = () => {
   const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()
   // 지난 달 마지막 일자 구하기
   const prevLastDay = new Date(date.getFullYear(), date.getMonth(), 0).getDate()
-  // 오늘날짜의 요일! 6 (토욜)
+  // 오늘날짜의 요일! 0(일) ~ 6(토)
   const firstDayIndex = date.getDay()
-  // 이번달 마지막 날짜의 요일 1 (월욜)
+  // 이번달 마지막 날짜의 요일
   const lastDayIndex = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDay();
 
   const nextDays = 7 - lastDayIndex - 1;

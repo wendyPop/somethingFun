@@ -31,6 +31,10 @@ playButton.addEventListener('click', start)
 pauseButton.addEventListener('click', pause)
 resetButton.addEventListener('click', reset)
 
+
+
+
+
 function print(txt) {
   document.getElementById('display').innerHTML = txt
 }
