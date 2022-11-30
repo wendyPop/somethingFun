@@ -2,11 +2,14 @@ let startTime
 let elapsedTime = 0
 let timerInterval
 
+// 여기가 핵심
 const start = () => {
+  // 현재시간 - 경과시간 = 시작시간
   startTime = Date.now() - elapsedTime
   timerInterval = setInterval(function printTime() {
+    // 현재시간 - 시작시간 = 경과시간
     elapsedTime = Date.now() - startTime
-    print(timeToString(elapsedTime))
+    print(timeToString(elapsedTime)) // 경과한 시간을 화면에 표시
   }, 10)
   showButton('PAUSE')
 }
@@ -49,14 +52,17 @@ function showButton( key ) {
 function timeToString(time) {
 
   let diffInHrs = time / 3600000;
-  let hh = Math.floor(diffInHrs)
 
+  // 분
+  let hh = Math.floor(diffInHrs)
   let diffInMin = (diffInHrs - hh) * 60;
   let mm = Math.floor(diffInMin)
 
+  // 초
   let diffInSec = (diffInMin - mm) * 60
   let ss = Math.floor(diffInSec)
 
+  // 밀리초
   let diffInMs = (diffInSec - ss) * 100
   let ms = Math.floor(diffInMs)
 
