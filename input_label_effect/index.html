@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="robots" content="index, follow">
+<title></title>
+<link rel="stylesheet" href="css/main.css">
+
+<!--[if lt IE 9]>
+<script src="js/IE9.js"></script>
+<script src="js/html5shiv.js"></script>
+<script src="js/respond.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 8]>
+<script src="js/IE8.js"></script>
+<script src="js/IE8.js">IE7_PNG_SUFFIX=".png";</script>
+<![endif]-->
+
+<!--[if lt IE 7]>
+<script src="js/IE7.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div class="outBox">
+      <div class="inputBox">
+          <input type="text" id="sampleId" name="">
+          <label for="sampleId">이메일 또는 휴대전화</label>
+      </div>
+  </div>
+  <script type="text/javascript">
+
+    var loginBox = document.querySelector('.outBox');
+    var loginInputBox = document.querySelector('#sampleId');
+    loginInputBox.addEventListener('keyup', function(){
+      if(!loginInputBox.value == ''){
+          loginBox.classList.add('existence');
+      }else{
+          loginBox.classList.remove('existence');
+      }
+    });
+  </script>
+</body>
+</html>

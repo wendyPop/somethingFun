@@ -67,6 +67,7 @@
         })
 
         text.addEventListener('keydown', function(event) {
+		  // when capslock is on
           if (event.getModifierState('CapsLock')) {
             redText.classList.remove('hidden')
           } else {

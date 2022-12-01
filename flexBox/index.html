@@ -15,6 +15,7 @@
             overflow: hidden;
         }
         .wrapper {
+            /* 중앙 정렬 */
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -26,6 +27,7 @@
         header {
             width: 100%;
             height: 100px;
+            /* 로고영역과 메뉴영역 띄워두기*/
             display: flex;
             justify-content: space-around;
             line-height: 100px;
@@ -52,6 +54,7 @@
         }
         @media screen and (max-width: 480px)  {
             header {
+                /* 모바일 구간에서는 세로쌓기*/
                 flex-direction: column;
             }
         }

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ripple Event</title>
+    <style>
+        body {
+            background-color: #000;
+        }
+        .ripple {
+            width: 100px;
+            height: 100px;
+            margin: 200px auto;
+        }
+        .ripple div {
+            /* 2개의 div 위치 고정 */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            /* 2개의 div 의 보더 선 효과 주기 */
+            border: 6px solid deepskyblue;
+            border-radius: 50%;
+            animation: ripple 1s cubic-bezier(.03, .54, .6, .63) infinite;
+        }
+        .ripple div:nth-child(2) {
+            /* 2번째 요소에게는 애니메이션 효과를 딜레이 시키기 */
+            animation-delay: 0.5s;
+        }
+        @keyframes ripple {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 0;
+            }
+            5% {
+                width: 0;
+                height: 0;
+                opacity: 0;
+            }
+            5.1% {
+                width: 0;
+                height: 0;
+                opacity: 1;
+            }
+            100% {
+                width: 88px;
+                height: 88px;
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="ripple">
+        <div></div>
+        <div></div>
+    </div>
+</body>
+</html>
