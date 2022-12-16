@@ -1,9 +1,10 @@
 <template>
   <div id="app">
-    <div v-cloak class="photos">
+    <div class="photos">
       <div v-for="photo in photos" :key="photo.id" class="photo">
         <div class="photo__title">{{ photo.title }}</div>
         <div :style="`background-image: url(${photo.url});`"
+             ref="imageListObserver"
              :class="{ loaded: photo.imageLoaded }"
              class="photo__image">
         </div>
@@ -39,7 +40,6 @@ export default {
         .then(() => {
           this.initIntersectionObserver()
         })
-
     // For next photo
     this.increasePhotoLength()
   },
