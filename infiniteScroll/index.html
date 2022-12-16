@@ -1,0 +1,61 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            background: black;
+            height: 6000px;
+        }
+        div {
+            margin-top: 1000px;
+            color: white;
+            text-align: center;
+            opacity: 0;
+            transition: all .5s;
+        }
+    </style>
+</head>
+<body>
+    <div><h1>애플페이 출시</h1></div>
+    <div><h1>그래서 준비되었다.</h1></div>
+    <div><h1>오랫동안 사용해온 애플사용기</h1></div>
+    <div><h1>Infinity Scroll</h1></div>
+    <div><h1>intersection observer</h1></div>
+    <script>
+
+        // 감시중인 요소가 화면에 나타나면 콜백실행
+        let observer = new IntersectionObserver((e) => {
+
+		  if(e[0].intersectionRatio > 0) {
+			// e[0]은 현재 화면에 나타나는 요소로 바뀌며 즉 e[1]은 없다.
+			console.log('첫번째 로드')
+          }
+
+		  e.forEach((box)=> {
+			// 요소가 화면에 나타났다면
+			if(box.isIntersecting) {
+			  box.target.style.opacity = 1
+              box.target.style.transform = 'rotate(0deg)'
+            } else {
+			  // 사라졌을때
+              box.target.style.opacity = 1
+            }
+			if (box.intersectionRatio >= 0.75) {
+			  console.log('나타남')
+			}
+          })
+        })
+
+        // 원하는 요소를 감시
+        let div = document.querySelectorAll('div')
+        observer.observe(div[0])
+        observer.observe(div[1])
+        observer.unobserve(div[2])
+        observer.observe(div[3])
+    </script>
+</body>
+</html>
