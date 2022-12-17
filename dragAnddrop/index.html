@@ -1,0 +1,70 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Drag and Drop</title>
+    <style>
+        body {
+            user-select: none;
+        }
+        #draggable {
+            text-align: center;
+            background: white;
+            /*cursor: text;           // 드래그할때 모양*/
+            /*cursor: pointer;        // 검지 손가락*/
+            /*cursor: alias;          // 구부러진 화살표*/
+            /*cursor: all-scroll;     // 십자가 화살표 */
+            /*cursor: cell;           // 십자가*/
+            /*cursor: col-resize;     // 십자가 화살표*/
+            /*cursor: context-menu;   // 화살표 옆에 네모박스메뉴*/
+            /*cursor: copy;           // 화살표옆에 + 모양*/
+            /*cursor: crosshair;      // 얇은 십자가*/
+            /*cursor: e-resize;       // 우측 화살표*/
+            /*cursor: ew-resize;      // 가로로 화사표*/
+            /*cursor: help;           // 물음표*/
+            /*cursor: move;           // 십자가 화살표*/
+            /*cursor: n-resize;       // 위로 화살표*/
+            /*cursor: ne-resize;      // 대각선 화살표*/
+            /*cursor: nesw-resize;*/
+            /*cursor: no-drop;        // 금지표시*/
+            /*cursor: none;           // 커서 없애기*/
+            /*cursor: not-allowed;            // 금지표시와 같음*/
+            /*cursor: progress;               // 마우스옆 로딩*/
+            /*cursor: row-resize;*/
+            /*cursor: zoom-in;            // + 돋보기*/
+            /*cursor: zoom-out;*/
+            /*cursor: wait;*/
+            /*cursor: revert;*/
+            cursor: grab;
+        }
+        .dropzone {
+            width: 200px;
+            height: 40px;
+            background: blueviolet;
+            margin: 10px;
+            padding: 10px;
+        }
+        .dropzone.dragover {
+            background-color: purple;
+        }
+        .dragging {
+            opacity: .5;
+            /*cursor: grab;*/
+            cursor: text;
+        }
+    </style>
+</head>
+<body>
+    <!--css 클래스명같은 것으로 dropzone 임을 표시-->
+    <div class="dropzone">
+        <div draggable="true" id="draggable">
+            <span>드래그 해보세요<i>비밀데스</i></span>
+            <img src="" alt="비밀">
+        </div>
+    </div>
+    <div class="dropzone"></div>
+    <script src="script.js"></script>
+</body>
+</html>
